@@ -1,10 +1,54 @@
 {% if menu %}
-	<ul>
-	{% for item in items %}
-		<li class="{{ item.classes | join(' ') }}">
-			<a target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
-			{% include "menu.twig" with {'items': item.children} %}
-		</li>
-	{% endfor %}
-	</ul>
+<nav class="navbar-expand-lg menu">
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+		aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+		<i class="fas fa-bars"></i>
+	</button>
+	<div class="collapse navbar-collapse container" id="basicExampleNav" style="justify-content:flex-end;" >
+		<ul class="navbar-nav" id='nav-menu'>
+			{% for item in items %}
+			{% if item.get_children %}
+			<li class="nav-item dropdown {% for child in item.get_children if child.current %}active{% endfor %}">
+				<a target="{{ item.target }}" href="{{ item.link }}" class="nav-link dropdown-toggle text-white"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ item.title }}
+					{% if item.target == '_blank' %}
+					<small><i class="fas fa-external-link-alt"></i></small>
+					{% endif %}
+				</a>
+				<div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+					{% for child in item.get_children %}
+					<a target="{{ child.target }}" href="{{ child.link }}"
+						class="dropdown-item {{ child.current ? 'active' : '' }} text-white">
+						{{ child.title }}
+						{% if child.target == '_blank' %}
+						<small><i class="fas fa-external-link-alt"></i></small>
+						{% endif %}
+					</a>
+					{% if child.children %}
+					{% for child in child.children %}
+					<a target="{{ child.target }}" href="{{ child.link }}"
+						class="dropdown-item {{ child.current ? 'active' : '' }}" style="padding-left:30px;">
+						{{ child.title }}
+						{% if child.target == '_blank' %}
+						<small><i class="fas fa-external-link-alt"></i></small>
+						{% endif %}
+					</a>
+					{% endfor %}
+					{% endif %}
+					{% endfor %}
+				</div>
+			</li>
+			{% else %}
+			<li class="{{ item.classes | join(' ') }} nav-item {{ item.current ? 'active' : '' }}">
+				<a target="{{ item.target }}" href="{{ item.link }}" class="nav-link text-white item-menu">{{ item.title }}
+					{% if item.target == '_blank' %}
+					<small><i class="fas fa-external-link-alt"></i></small>
+					{% endif %}
+				</a>
+			</li>
+			{% endif %}
+			{% endfor %}
+		</ul>
+	</div>
+</nav>
 {% endif %}
