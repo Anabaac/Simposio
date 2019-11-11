@@ -3,6 +3,9 @@
 <!--[if IE 9]><html class="no-js no-svg ie ie9 lt-ie9 lt-ie8" {{ site.language_attributes }}> <![endif]-->
 <!--[if gt IE 9]><!--><html class="no-js no-svg" {{ site.language_attributes }}> <!--<![endif]-->
 <head>
+    <script>
+        window.twigContext = {{ _context | json_encode() }};
+    </script>
     <meta charset="{{ site.charset }}" />
     <meta name="description" content="{{ site.description }}">
     <link rel="stylesheet" href="{{ site.theme.link }}/style.css" type="text/css" media="screen" />

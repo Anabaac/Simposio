@@ -86,6 +86,7 @@ class StarterSite extends Timber\Site {
 		$context['notes'] = 'These values are available everytime you call Timber::context();';
 		$context['menu']  = new Timber\Menu();
 		$context['site']  = $this;
+		$context['widgets']['sidebar'] = Timber::get_widgets('sidebar');
 		return $context;
 	}
 
@@ -165,3 +166,77 @@ class StarterSite extends Timber\Site {
 }
 
 new StarterSite();
+
+add_action('init', 'all_custom_post_types');
+ 
+function all_custom_post_types() {
+
+    $types = array(
+
+        array('the_type' => 'programacao',
+            'single'   => 'Programação',
+            'plural'   => 'Programações',
+            'dashicon' => 'dashicons-video-alt2'),
+    );
+
+    foreach ($types as $type) {
+
+        $the_type = $type['the_type'];
+        $single = $type['single'];
+        $plural = $type['plural'];
+        $dashicon = $type['dashicon'];
+
+        $labels = array(
+        'name'               => _x($plural, 'post type general name'),
+        'singular_name'      => _x($single, 'post type singular name'),
+        'add_new'            => _x('Adicionar', $single),
+        'add_new_item'       => __('Adicionar '. $single),
+        'edit_item'          => __('Editar '.$single),
+        'new_item'           => __('Novo '.$single),
+        'view_item'          => __('Ver '.$single),
+        'search_items'       => __('Pesquisar '.$plural),
+        'not_found'          => __('Não '.$plural.' encontrado'),
+        'not_found_in_trash' => __('Não '.$plural.' encontrado na lixeira'),
+        'parent_item_colon'  => ''
+        );
+
+        $args = array(
+        'labels'             => $labels,
+        'public'             => true,
+        'publicly_queryable' => true,
+        'show_ui'            => true,
+        'query_var'          => true,
+        'rewrite'            => true,
+        'capability_type'    => 'post',
+        'rewrite'            => array('with_front' => false, 'slug' => $the_type),
+        'hierarchical'       => false,
+        'show_in_rest'       => true,
+        'menu_position'      => 5,
+        'supports'           => array('title','editor','thumbnail','revisions'),        
+        'has_archive'        => true,
+        'menu_icon'	         => $dashicon
+        );
+
+        register_post_type($the_type, $args);
+    }
+}
+
+function smallenvelop_widgets_init() {
+	register_sidebar( array(
+		'name' => __( 'Sidebar', 'smallenvelop' ),
+		'id' => 'sidebar',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget' => '</div>',
+		'before_title' => '<p>',
+		'after_title' => '</p>',
+	) );
+}
+add_action( 'widgets_init', 'smallenvelop_widgets_init' );
+
+function wpb_load_widget() {
+	// register_widget( 'teste_widget' );
+	//register_widget( 'wpb_widget' );
+}
+add_action( 'widgets_init', 'wpb_load_widget' );
+
+add_filter('widget_text', 'do_shortcode');

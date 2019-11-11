@@ -1,16 +1,27 @@
 .menu{
     align-items: center;
     display: flex;
+    border: 1px solid #000000;
 }
 
+
 .item-menu{
-    background-color: #ffffff12;
-    border-radius: 2rem;
+    border-bottom: 3px solid #000000;
     margin: 0 3px;
 }
+.menu-item:hover{
+    border-bottom: 3px solid #fff;
+}
 .fundo-card{
-    
-    background-color: #3f51b5;
-    /* background-color: #e8e8e8;*/
     margin-left: 0px !important;
+}
+.menu-item{
+    align-items: center;
+    display: flex;
+}
+
+.divider {
+    width: 2px;
+    margin: 16px 0;
+    background: #000000;
 }

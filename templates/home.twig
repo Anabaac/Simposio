@@ -1,98 +1,48 @@
 {% extends "base.twig" %}
 
 {% block content %}
-    <div class="row w-100 mb-5">
+    <div class="row w-100">
         <div class="col">
             <div class="d-flex" style="justify-content:center;">
-                <img src="{{ theme.uri }}/assets/imagem/simposio.png" style="height:350px;">
+                <img src="{{ theme.uri }}/assets/imagem/simposio3.png" style="height:300px;">
             </div>
         </div>
     </div>
-    <div class="row w-100 fundo-card">
-        <div class="col" style="margin: 50px;">
-           <!-- Card deck -->
-<div class="card-deck">
-
-  <!-- Card -->
-  <div class="card mb-4">
-
-    <!--Card image-->
-    <div class="view overlay">
-      <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
-      <a href="#!">
-        <div class="mask rgba-white-slight"></div>
-      </a>
-    </div>
-
-    <!--Card content-->
-    <div class="card-body">
-
-      <!--Title-->
-      <h4 class="card-title">Card title</h4>
-      <!--Text-->
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-      <button type="button" class="btn btn-light-blue btn-md">Read more</button>
-
-    </div>
-
-  </div>
-  <!-- Card -->
-
-  <!-- Card -->
-  <div class="card mb-4">
-
-    <!--Card image-->
-    <div class="view overlay">
-      <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/14.jpg" alt="Card image cap">
-      <a href="#!">
-        <div class="mask rgba-white-slight"></div>
-      </a>
-    </div>
-
-    <!--Card content-->
-    <div class="card-body">
-
-      <!--Title-->
-      <h4 class="card-title">Card title</h4>
-      <!--Text-->
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-      <button type="button" class="btn btn-light-blue btn-md">Read more</button>
-
-    </div>
-
-  </div>
-  <!-- Card -->
-
-  <!-- Card -->
-  <div class="card mb-4">
-
-    <!--Card image-->
-    <div class="view overlay">
-      <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/15.jpg" alt="Card image cap">
-      <a href="#!">
-        <div class="mask rgba-white-slight"></div>
-      </a>
-    </div>
-
-    <!--Card content-->
-    <div class="card-body">
-
-      <!--Title-->
-      <h4 class="card-title">Card title</h4>
-      <!--Text-->
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-      <button type="button" class="btn btn-light-blue btn-md">Read more</button>
-
-    </div>
-
-  </div>
-  <!-- Card -->
-
-</div>
-<!-- Card deck -->
+    <div class="container">
+      <div class="row" style="background-color: #ffd300;">
+        <div class="col m-2">
+          <h5 class="h5 d-flex justify-content-center"><strong>A importância de compartilhar</strong></h5>
+          <div class="text-center">Durante o evento, alunos trocam experiências e compartilham conhecimentos.</div>
         </div>
+        <div class="divider"></div>
+        <div class="col m-2">
+          <h5 class="h5 d-flex justify-content-center"><strong>Incentivar, motivar.</strong></h5>
+          <div class="text-center">Fomentando o interesse por Pesquisa e Desenvolvimento nos alunos de Tecnologia de Informação.</div>
+        </div>
+        <div class="divider"></div>
+        <div class="col m-2">
+          <h5 class="h5 d-flex justify-content-center"><strong>Um evento de alunos, para alunos!</strong></h5>
+          <div class="text-center">Contamos com a presença de mais de 110 pessoas na última edição.</div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center m-2">
+        <a href="https://www.sympla.com.br/3-simposio-de-tecnologias-aplicadas-uniso-unisointegrati__707975"><button type="button" class="btn btn-info"><strong>Inscrever-se</strong></button></a>
+      </div>
+      <div class="row">
+        {% for item in programacao %}
+        <div class="col m-2" style="background-color: #efefefbd;border-radius: 2rem;">
+          <h1 class="h1">{{ item.title }}</h1>
+          <p>
+            {{ item.content }}
+          </p>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="m-3">
+        <h1 class="h1 text-center">Patrocinadores</h1>
+        <div class="d-flex justify-content-center">{{ widgets.sidebar }}</div>
+      </div>
     </div>
+
+
 {% endblock %}

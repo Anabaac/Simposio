@@ -15,9 +15,9 @@
 
 $context          = Timber::context();
 $context['posts'] = new Timber\PostQuery();
-$context['foo']   = 'bar';
 $templates        = array( 'index.twig' );
 if ( is_home() ) {
 	array_unshift( $templates, 'front-page.twig', 'home.twig' );
+	$context['programacao'] = Timber::get_posts('post_type=programacao&posts_per_page=2');
 }
 Timber::render( $templates, $context );
